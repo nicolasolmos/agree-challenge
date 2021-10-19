@@ -6,8 +6,15 @@ import (
     "github.com/gin-gonic/gin"
 )
 
-
 func putPokemonController(context *gin.Context) {
+	Pokemon json
+	error = context.ShouldBindJSON(&json);
+
+	if error != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+
+	context.JSON(http.StatusCreated, gin.H{"status": "created"});
 
 }
 
