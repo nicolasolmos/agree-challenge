@@ -76,8 +76,32 @@ func putPokemonController(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"status": "created", "id": newId})
 }
 
+//TODO: Implement OWASP WebSec validations
 func deletePokemonController(context *gin.Context) {
 
+	var id string
+	var databaseError error
+	var deletionQuery string
+
+	id = context.Param("id")
+
+	if len(id) == 0 {
+		context.JSON(http.StatusInternalServerError, gin.H{"status": "Internal Server Error", "description": "Missing id on URL"})
+		panic(error.Error)
+	}
+
+	deletionQuery = fmt.Sprintf("DELETE FROM pokemon WHERE id = '%s'", id)
+
+	deletion, databaseError := db.Query(deletionQuery)
+
+	if databaseError != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"status": "Internal Server Error", "description": "Can not delete the specified id"})
+		panic(error.Error)
+	}
+
+	defer deletion.Close()
+
+	context.JSON(http.StatusOK, gin.H{"status": "Deleted"})
 }
 
 func getPokemonByIdController(context *gin.Context) {
