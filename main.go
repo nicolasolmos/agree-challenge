@@ -104,8 +104,34 @@ func deletePokemonController(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"status": "Deleted"})
 }
 
+//TODO: Implement OWASP WebSec validations
 func getPokemonByIdController(context *gin.Context) {
+	var id string
+	var requestedPokemon Pokemon
+	var IsFirstEdition string
 
+	id = context.Param("id")
+
+	if len(id) == 0 {
+		context.JSON(http.StatusBadRequest, gin.H{"description": "Missing id on URL"})
+		panic(error.Error)
+	}
+
+	databaseError := db.QueryRow("SELECT * FROM pokemon WHERE id = ?", id).Scan(&id, &requestedPokemon.Name, &requestedPokemon.Health, &IsFirstEdition, &requestedPokemon.ExpansionDeck, &requestedPokemon.PokemonType, &requestedPokemon.Oddity, &requestedPokemon.Price, &requestedPokemon.CardPicture, &requestedPokemon.CardCreationDate)
+
+	switch IsFirstEdition {
+	case "\x00":
+		requestedPokemon.IsFirstEdition = false
+	case "\x01":
+		requestedPokemon.IsFirstEdition = true
+	}
+
+	if databaseError != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"description": "Could not get the specified pokemon"})
+		panic(error.Error)
+	}
+
+	context.JSON(http.StatusOK, gin.H{"data": requestedPokemon})
 }
 
 func updatePokemonController(context *gin.Context) {
