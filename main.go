@@ -2,7 +2,7 @@ package main
 
 import (
     "net/http"
-	"ftm"
+	"fmt"
     "github.com/gin-gonic/gin"
 	"database/sql"
     "github.com/go-sql-driver/mysql"
@@ -43,7 +43,7 @@ func putPokemonController(context *gin.Context) {
     
     defer insert.Close()
 
-	context.JSON(http.StatusCreated, gin.H{"status": "created"});
+	context.JSON(http.StatusCreated, gin.H{"status": "created"})
 }
 
 func deletePokemonController(context *gin.Context) {
