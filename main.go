@@ -139,7 +139,32 @@ func updatePokemonController(context *gin.Context) {
 }
 
 func getAllPokemonsController(context *gin.Context) {
+	var pokemonArray []Pokemon
 
+	rows, databaseError := db.Query("SELECT * FROM pokemon")
+
+	if databaseError != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"description": "Can not get all pokemons from database"})
+		panic(error.Error)
+	}
+
+	for rows.Next() {
+		var myPokemon Pokemon
+		var id string
+		var IsFirstEdition string
+		rows.Scan(&id, &myPokemon.Name, &myPokemon.Health, &IsFirstEdition, &myPokemon.ExpansionDeck, &myPokemon.PokemonType, &myPokemon.Oddity, &myPokemon.Price, &myPokemon.CardPicture, &myPokemon.CardCreationDate)
+
+		switch IsFirstEdition {
+		case "\x00":
+			myPokemon.IsFirstEdition = false
+		case "\x01":
+			myPokemon.IsFirstEdition = true
+		}
+
+		pokemonArray = append(pokemonArray, myPokemon)
+	}
+
+	context.JSON(http.StatusOK, gin.H{"data": pokemonArray})
 }
 
 func main() {
