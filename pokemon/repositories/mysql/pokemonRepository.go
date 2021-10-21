@@ -20,7 +20,7 @@ func NewPokemonRepository() *PokemonRepository {
 	// I am also concious that I should not use the root user and instad create a secondary one.
 	// But this is a test and so on...
 
-	db, connectionError = sql.Open("mysql", "ubuntu:aa114477@tcp(127.0.0.1:3306)/agree")
+	db, connectionError = sql.Open("mysql", "ubuntu@tcp(127.0.0.1:3306)/agree")
 
 	if connectionError != nil {
 		panic("ERROR opening the DB connection")
