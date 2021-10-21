@@ -41,7 +41,14 @@ func (base PokemonRepository) Insert(paramPokemon entities.Pokemon) {
 	defer insertion.Close()
 }
 
-func (base PokemonRepository) Delete() {
+func (base PokemonRepository) Delete(paramPokemon entities.Pokemon) {
+
+	deletion, databaseError := base.db.Query("DELETE FROM pokemon WHERE id = ?", paramPokemon.Id)
+	defer deletion.Close()
+
+	if databaseError != nil {
+		panic("ERROR when deleting spcified id on DB")
+	}
 
 }
 

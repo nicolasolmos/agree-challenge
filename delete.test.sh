@@ -1,2 +1,2 @@
 #!/bin/bash
-curl -X DELETE http://localhost:8080/pokemon/7bd17099-5026-4b44-a0d7-f8ed76af1139
+curl -X DELETE http://localhost:8080/pokemon/e818bc80-7979-40af-9ee9-75cdc5c03766
