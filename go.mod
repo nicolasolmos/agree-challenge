@@ -1,4 +1,4 @@
-module nicolas-olmos/agree-chanllenge
+module nicolas-olmos/agree-challenge
 
 go 1.17
 
