@@ -1,0 +1,5 @@
+package pokemon
+
+func DestroyPokemonUsecase() {
+
+}

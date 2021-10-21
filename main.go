@@ -4,10 +4,10 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
+	controllers "nicolas-olmos/agree-challenge/pokemon/controllers"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/google/uuid"
 )
 
 // Relocate this code to pokemon.go file
@@ -37,43 +37,6 @@ func connectDB() {
 		fmt.Println("Error opening the DB connection")
 		panic(error.Error())
 	}
-}
-
-//TODO: perform OWASP validations
-func putPokemonController(context *gin.Context) {
-
-	var newId string
-	var json Pokemon
-	var error error
-
-	error = context.ShouldBindJSON(&json)
-	newId = uuid.NewString()
-
-	if error != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"status": "Bad Request"})
-	}
-
-	var isFirstEdition int
-
-	isFirstEdition = 0
-
-	if json.IsFirstEdition == true {
-		isFirstEdition = 1
-	}
-
-	// TODO: replace or format this line below correctly.
-	insertionQuery := fmt.Sprintf("INSERT INTO pokemon VALUES ('%s', '%s', %d, %b, '%s', '%s', '%s', %f, '%s', '%s')", newId, json.Name, json.Health, isFirstEdition, json.ExpansionDeck, json.PokemonType, json.Oddity, json.Price, json.CardPicture, json.CardCreationDate)
-	insertion, error := db.Query(insertionQuery)
-
-	if error != nil {
-		fmt.Println("ERROR inserting a pokemon on the database.")
-		context.JSON(http.StatusInternalServerError, gin.H{"status": "ERROR inserting a pokemon on the database."})
-		panic(error.Error())
-	}
-
-	defer insertion.Close()
-
-	context.JSON(http.StatusCreated, gin.H{"status": "created", "id": newId})
 }
 
 //TODO: Implement OWASP WebSec validations
@@ -172,7 +135,7 @@ func main() {
 	router := gin.Default()
 	router.GET("/pokemon", getAllPokemonsController)
 	router.GET("/pokemon/:id", getPokemonByIdController)
-	router.PUT("/pokemon", putPokemonController)
+	router.PUT("/pokemon", controllers.PutPokemonController)
 	router.DELETE("/pokemon/:id", deletePokemonController)
 	router.POST("/pokemon/:id", updatePokemonController)
 	router.Run("localhost:8080")

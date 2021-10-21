@@ -1,0 +1,3 @@
+package pokemon
+
+func GetById() {}
