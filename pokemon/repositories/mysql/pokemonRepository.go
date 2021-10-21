@@ -2,6 +2,7 @@ package pokemon
 
 import (
 	"database/sql"
+	"fmt"
 	entities "nicolas-olmos/agree-challenge/pokemon/entities"
 )
 
@@ -35,6 +36,7 @@ func (base PokemonRepository) Insert(paramPokemon entities.Pokemon) {
 	insertion, insertionError := base.db.Query("INSERT INTO pokemon VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", paramPokemon.Id, paramPokemon.Name, paramPokemon.Health, paramPokemon.IsFirstEdition, paramPokemon.ExpansionDeck, paramPokemon.PokemonType, paramPokemon.Oddity, paramPokemon.Price, paramPokemon.CardPicture, paramPokemon.CardCreationDate)
 
 	if insertionError != nil {
+		fmt.Println(nil)
 		panic("ERROR when trying to insert pokemon on MySQL table")
 	}
 
