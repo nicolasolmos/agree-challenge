@@ -81,7 +81,7 @@ func main() {
 	router.PUT("/pokemon", controllers.PutPokemonController)
 	router.DELETE("/pokemon/:id", controllers.DeletePokemonController)
 	router.POST("/pokemon/:id", updatePokemonController)
-	router.Run("localhost:8080")
+	router.Run("0.0.0.0:3000")
 
 	defer db.Close()
 }
