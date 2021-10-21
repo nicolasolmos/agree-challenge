@@ -52,8 +52,42 @@ func (base PokemonRepository) Delete(paramPokemon entities.Pokemon) {
 
 }
 
-func (baseRepository PokemonRepository) SelectAll()       {}
-func (baseRepository PokemonRepository) SelectAndFilter() {}
-func (baseRepository PokemonRepository) SelectById()      {}
-func (baseRepository PokemonRepository) Selectpage()      {}
-func (baseRepository PokemonRepository) UpdateAll()       {}
+func (baseRepository PokemonRepository) SelectAll() *[]entities.Pokemon {
+	var pokemonArray []entities.Pokemon
+	rows, databaseError := baseRepository.db.Query("SELECT * FROM pokemon")
+
+	if databaseError != nil {
+		panic("Error when trying to select all rows from pokemon table")
+	}
+
+	for rows.Next() {
+		var myPokemon entities.Pokemon
+		var IsFirstEdition string
+		rows.Scan(&myPokemon.Id, &myPokemon.Name, &myPokemon.Health, &IsFirstEdition, &myPokemon.ExpansionDeck, &myPokemon.PokemonType, &myPokemon.Oddity, &myPokemon.Price, &myPokemon.CardPicture, &myPokemon.CardCreationDate)
+
+		switch IsFirstEdition {
+		case "\x00":
+			myPokemon.IsFirstEdition = false
+		case "\x01":
+			myPokemon.IsFirstEdition = true
+		}
+
+		pokemonArray = append(pokemonArray, myPokemon)
+	}
+
+	return &pokemonArray
+}
+
+func (baseRepository PokemonRepository) SelectAndFilter() *[]entities.Pokemon {
+	var pokemonArray []entities.Pokemon
+	return &pokemonArray
+}
+func (baseRepository PokemonRepository) SelectById() *[]entities.Pokemon {
+	var pokemonArray []entities.Pokemon
+	return &pokemonArray
+}
+func (baseRepository PokemonRepository) Selectpage() *[]entities.Pokemon {
+	var pokemonArray []entities.Pokemon
+	return &pokemonArray
+}
+func (baseRepository PokemonRepository) UpdateAll(entities.Pokemon) {}
