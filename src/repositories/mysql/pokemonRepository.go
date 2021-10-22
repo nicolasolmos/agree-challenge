@@ -2,8 +2,10 @@ package repositories
 
 import (
 	"database/sql"
+	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/nicolasolmos/agree-challenge/src/controllers/config"
 	entities "github.com/nicolasolmos/agree-challenge/src/entities"
 )
 
@@ -21,7 +23,7 @@ func NewPokemonRepository() *PokemonRepository {
 	// I am also concious that I should not use the root user and instad create a secondary one.
 	// But this is a test and so on...
 
-	db, connectionError = sql.Open("mysql", "root:aa114477@tcp(127.0.0.1:3306)/agree")
+	db, connectionError = sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", config.DB_USER, config.DB_PASSWORD, config.DB_HOST, config.DB_DATABASE))
 
 	if connectionError != nil {
 		panic(connectionError)
