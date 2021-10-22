@@ -1,7 +1,7 @@
 package main
 
 import (
-	controllers "github.com/nicolasolmos/agree-challenge/pokemon/controllers"
+	controllers "github.com/nicolasolmos/agree-challenge/src/controllers"
 
 	"github.com/gin-gonic/gin"
 )

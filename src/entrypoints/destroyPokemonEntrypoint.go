@@ -1,8 +1,8 @@
 package entrypoints
 
 import (
-	repositories "github.com/nicolasolmos/agree-challenge/pokemon/repositories/mysql"
-	usecases "github.com/nicolasolmos/agree-challenge/pokemon/usecases"
+	repositories "github.com/nicolasolmos/agree-challenge/src/repositories/mysql"
+	usecases "github.com/nicolasolmos/agree-challenge/src/usecases"
 )
 
 func DestroyPokemonEntrypoint(paramId string) {

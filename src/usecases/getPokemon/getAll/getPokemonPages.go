@@ -1,6 +1,6 @@
 package usecases
 
-import pokemon "github.com/nicolasolmos/agree-challenge/pokemon/entities"
+import pokemon "github.com/nicolasolmos/agree-challenge/src/entities"
 
 func GetPokemonPages() *[]pokemon.Pokemon {
 	var pokemonArray []pokemon.Pokemon

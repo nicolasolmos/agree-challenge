@@ -1,10 +1,10 @@
-package pokemon
+package controllers
 
 import (
 	"net/http"
 
-	entities "github.com/nicolasolmos/agree-challenge/pokemon/entities"
-	entrypoints "github.com/nicolasolmos/agree-challenge/pokemon/entrypoints"
+	entities "github.com/nicolasolmos/agree-challenge/src/entities"
+	entrypoints "github.com/nicolasolmos/agree-challenge/src/entrypoints"
 
 	"github.com/gin-gonic/gin"
 )

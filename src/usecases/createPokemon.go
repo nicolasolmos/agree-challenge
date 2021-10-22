@@ -1,9 +1,9 @@
 package usecases
 
 import (
-	dtos "github.com/nicolasolmos/agree-challenge/pokemon/DTOS"
-	entities "github.com/nicolasolmos/agree-challenge/pokemon/entities"
-	repositories "github.com/nicolasolmos/agree-challenge/pokemon/repositories"
+	dtos "github.com/nicolasolmos/agree-challenge/src/DTOS"
+	entities "github.com/nicolasolmos/agree-challenge/src/entities"
+	repositories "github.com/nicolasolmos/agree-challenge/src/repositories"
 
 	uuid "github.com/google/uuid"
 )

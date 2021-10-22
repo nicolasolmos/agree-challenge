@@ -1,4 +1,4 @@
-package pokemon
+package dtos
 
 type PutPokemonDTO struct {
 	Name             string  `json:"name"`

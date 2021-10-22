@@ -3,7 +3,7 @@ package repositories
 import (
 	"database/sql"
 
-	entities "github.com/nicolasolmos/agree-challenge/pokemon/entities"
+	entities "github.com/nicolasolmos/agree-challenge/src/entities"
 )
 
 type PokemonRepository struct {

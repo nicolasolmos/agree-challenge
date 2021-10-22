@@ -1,10 +1,10 @@
-package pokemon
+package controllers
 
 import (
 	"net/http"
 
-	dtos "github.com/nicolasolmos/agree-challenge/pokemon/DTOS"
-	entrypoints "github.com/nicolasolmos/agree-challenge/pokemon/entrypoints"
+	dtos "github.com/nicolasolmos/agree-challenge/src/DTOS"
+	entrypoints "github.com/nicolasolmos/agree-challenge/src/entrypoints"
 
 	"github.com/gin-gonic/gin"
 )

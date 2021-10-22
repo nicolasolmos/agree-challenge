@@ -1,11 +1,11 @@
-package pokemon
+package controllers
 
 import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	entities "github.com/nicolasolmos/agree-challenge/pokemon/entities"
 	entrypoints "github.com/nicolasolmos/agree-challenge/pokemons/entrypoints"
+	entities "github.com/nicolasolmos/agree-challenge/src/entities"
 )
 
 func GetPokemonByIdController(context *gin.Context) {

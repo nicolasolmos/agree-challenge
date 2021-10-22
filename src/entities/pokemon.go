@@ -1,4 +1,4 @@
-package pokemon
+package entities
 
 type Pokemon struct {
 	Id               string

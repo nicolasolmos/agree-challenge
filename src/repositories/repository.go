@@ -1,6 +1,6 @@
 package repositories
 
-import entities "github.com/nicolasolmos/agree-challenge/pokemon/entities"
+import entities "github.com/nicolasolmos/agree-challenge/src/entities"
 
 type Repository interface {
 	Insert(entities.Pokemon)
