@@ -3,6 +3,7 @@ package repositories
 import (
 	"database/sql"
 
+	_ "github.com/go-sql-driver/mysql"
 	entities "github.com/nicolasolmos/agree-challenge/src/entities"
 )
 
@@ -23,7 +24,7 @@ func NewPokemonRepository() *PokemonRepository {
 	db, connectionError = sql.Open("mysql", "root:aa114477@tcp(127.0.0.1:3306)/agree")
 
 	if connectionError != nil {
-		panic("ERROR opening the DB connection")
+		panic(connectionError)
 	}
 	return &PokemonRepository{
 		db: db,

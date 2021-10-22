@@ -1,1 +1,1 @@
-curl -X GET localhost:8080/pokemon/11c18762-2f86-4979-99a0-eaf92f181bc3
+curl -X GET localhost:3000/pokemon/77583573-bda7-49f3-9bbe-e1d1da49df4a
