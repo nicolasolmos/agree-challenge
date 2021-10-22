@@ -1,7 +1,6 @@
 package dtos
 
-type PutPokemonDTO struct {
-	Id               string
+type PostPokemonDTO struct {
 	Name             string  `json:"name"`
 	Health           int     `json:"health"`
 	IsFirstEdition   bool    `json:"isFirstEdition"`
