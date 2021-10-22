@@ -15,6 +15,8 @@ func PutPokemonController(context *gin.Context) {
 
 	bindingError = context.ShouldBindJSON(&myPutPokemonDTO)
 
+	myPutPokemonDTO.Id = context.Param("id")
+
 	if bindingError != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"status": "Bad Request"})
 		panic("ERROR binding JSON")

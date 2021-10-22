@@ -8,6 +8,7 @@ import (
 
 func UpdatePokemon(paramPokemonDTO dtos.PutPokemonDTO, paramRepository repositories.Repository) {
 	var myPokemon = entities.Pokemon{
+		Id:               paramPokemonDTO.Id,
 		Name:             paramPokemonDTO.Name,
 		Health:           paramPokemonDTO.Health,
 		IsFirstEdition:   paramPokemonDTO.IsFirstEdition,
