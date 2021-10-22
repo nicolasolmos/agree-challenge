@@ -107,4 +107,19 @@ func (baseRepository PokemonRepository) Selectpage() *[]entities.Pokemon {
 	var pokemonArray []entities.Pokemon
 	return &pokemonArray
 }
-func (baseRepository PokemonRepository) UpdateAll(entities.Pokemon) {}
+
+func (baseRepository PokemonRepository) UpdateAll(paramPokemon entities.Pokemon) {
+	var isFirstEdition string = "\x00"
+
+	if paramPokemon.IsFirstEdition {
+		isFirstEdition = "\x01"
+	}
+	row, databaseError := baseRepository.db.Query("UPDATE pokemon SET name = ?, health = ?, is_first_edition = ?,  expansion_deck = ?, pokemon_type = ?, oddity = ?, price  = ?, card_picture = ?, card_creation_date = ? WHERE id = ?;", paramPokemon.Name, paramPokemon.Health, isFirstEdition, paramPokemon.ExpansionDeck, paramPokemon.PokemonType, paramPokemon.Oddity, paramPokemon.Price, paramPokemon.CardPicture, paramPokemon.CardCreationDate, paramPokemon.Id)
+
+	if databaseError != nil {
+		panic(databaseError.Error())
+	}
+
+	println(row) // remove this
+
+}

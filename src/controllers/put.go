@@ -20,6 +20,6 @@ func PutPokemonController(context *gin.Context) {
 		panic("ERROR binding JSON")
 	}
 
-	entrypoints.CreatePokemonEntrypoint(myPutPokemonDTO)
+	entrypoints.UpdatePokemon(myPutPokemonDTO)
 
 }
