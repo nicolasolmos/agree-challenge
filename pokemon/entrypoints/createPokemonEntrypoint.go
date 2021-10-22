@@ -1,9 +1,9 @@
 package pokemon
 
 import (
-	dtos "nicolas-olmos/agree-challenge/pokemon/DTOS"
-	repositories "nicolas-olmos/agree-challenge/pokemon/repositories/mysql"
-	usecases "nicolas-olmos/agree-challenge/pokemon/usecases"
+	dtos "github.com/nicolasolmos/agree-challenge/pokemon/DTOS"
+	repositories "github.com/nicolasolmos/agree-challenge/pokemon/repositories/mysql"
+	usecases "github.com/nicolasolmos/agree-challenge/pokemon/usecases"
 )
 
 func CreatePokemonEntrypoint(paramPokemon dtos.PutPokemonDTO) {

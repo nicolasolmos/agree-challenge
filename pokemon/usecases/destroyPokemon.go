@@ -1,8 +1,8 @@
 package pokemon
 
 import (
-	entities "nicolas-olmos/agree-challenge/pokemon/entities"
-	repositories "nicolas-olmos/agree-challenge/pokemon/repositories"
+	entities "github.com/nicolasolmos/agree-challenge/pokemon/entities"
+	repositories "github.com/nicolasolmos/agree-challenge/pokemon/repositories"
 )
 
 func DestroyPokemonUsecase(paramId string, paramRepository repositories.Repository) {

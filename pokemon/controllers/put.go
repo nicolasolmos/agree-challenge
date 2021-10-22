@@ -2,8 +2,9 @@ package pokemon
 
 import (
 	"net/http"
-	dtos "nicolas-olmos/agree-challenge/pokemon/DTOS"
-	entrypoints "nicolas-olmos/agree-challenge/pokemon/entrypoints"
+
+	dtos "github.com/nicolasolmos/agree-challenge/pokemon/DTOS"
+	entrypoints "github.com/nicolasolmos/agree-challenge/pokemon/entrypoints"
 
 	"github.com/gin-gonic/gin"
 )

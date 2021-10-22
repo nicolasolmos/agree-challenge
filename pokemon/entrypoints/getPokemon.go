@@ -1,3 +1,0 @@
-package pokemon
-
-func GetPokemonEntrypoint() {}

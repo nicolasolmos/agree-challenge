@@ -1,11 +1,11 @@
 package pokemon
 
 import (
-	dtos "nicolas-olmos/agree-challenge/pokemon/DTOS"
-	entities "nicolas-olmos/agree-challenge/pokemon/entities"
-	repositories "nicolas-olmos/agree-challenge/pokemon/repositories"
+	dtos "github.com/nicolasolmos/agree-challenge/pokemon/DTOS"
+	entities "github.com/nicolasolmos/agree-challenge/pokemon/entities"
+	repositories "github.com/nicolasolmos/agree-challenge/pokemon/repositories"
 
-	uuid "github.com/google/uuid"
+	uuid "github.com/nicolasolmos/agree-challengegoogle/uuid"
 )
 
 func CreatePokemonUseCase(paramPokemon dtos.PutPokemonDTO, paramRepository repositories.Repository) {

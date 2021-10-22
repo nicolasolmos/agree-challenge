@@ -2,8 +2,9 @@ package pokemon
 
 import (
 	"net/http"
-	entities "nicolas-olmos/agree-challenge/pokemon/entities"
-	entrypoints "nicolas-olmos/agree-challenge/pokemon/entrypoints"
+
+	entities "github.com/nicolasolmos/agree-challenge/pokemon/entities"
+	entrypoints "github.com/nicolasolmos/agree-challenge/pokemon/entrypoints"
 
 	"github.com/gin-gonic/gin"
 )

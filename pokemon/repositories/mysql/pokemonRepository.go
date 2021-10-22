@@ -2,7 +2,8 @@ package pokemon
 
 import (
 	"database/sql"
-	entities "nicolas-olmos/agree-challenge/pokemon/entities"
+
+	entities "github.com/nicolasolmos/agree-challenge/pokemon/entities"
 )
 
 type PokemonRepository struct {
@@ -82,9 +83,24 @@ func (baseRepository PokemonRepository) SelectAndFilter() *[]entities.Pokemon {
 	var pokemonArray []entities.Pokemon
 	return &pokemonArray
 }
-func (baseRepository PokemonRepository) SelectById() *[]entities.Pokemon {
-	var pokemonArray []entities.Pokemon
-	return &pokemonArray
+func (baseRepository PokemonRepository) SelectById(paramId string) entities.Pokemon {
+	var IsFirstEdition string
+	var myPokemon entities.Pokemon
+	var databaseError error
+
+	databaseError = baseRepository.db.QueryRow("SELECT * FROM pokemon WHERE id = ?", paramId).Scan(&myPokemon.Id, &myPokemon.Name, &myPokemon.Health, &IsFirstEdition, &myPokemon.ExpansionDeck, &myPokemon.PokemonType, &myPokemon.Oddity, &myPokemon.Price, &myPokemon.CardPicture, &myPokemon.CardCreationDate)
+
+	switch IsFirstEdition {
+	case "\x00":
+		myPokemon.IsFirstEdition = false
+	case "\x01":
+		myPokemon.IsFirstEdition = true
+	}
+
+	if databaseError != nil {
+		panic(databaseError.Error())
+	}
+	return myPokemon
 }
 func (baseRepository PokemonRepository) Selectpage() *[]entities.Pokemon {
 	var pokemonArray []entities.Pokemon

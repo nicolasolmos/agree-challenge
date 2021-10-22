@@ -3,7 +3,7 @@ package pokemon
 import (
 	"net/http"
 
-	entrypoints "nicolas-olmos/agree-challenge/pokemon/entrypoints"
+	entrypoints "github.com/nicolasolmos/agree-challenge/pokemon/entrypoints"
 
 	"github.com/gin-gonic/gin"
 )
