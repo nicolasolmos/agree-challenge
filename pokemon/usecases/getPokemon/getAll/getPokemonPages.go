@@ -1,4 +1,4 @@
-package pokemon
+package usecases
 
 import pokemon "github.com/nicolasolmos/agree-challenge/pokemon/entities"
 

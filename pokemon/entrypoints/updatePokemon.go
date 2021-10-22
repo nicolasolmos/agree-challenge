@@ -1,3 +1,3 @@
-package pokemon
+package entrypoints
 
 func UpdatePokemon() {}

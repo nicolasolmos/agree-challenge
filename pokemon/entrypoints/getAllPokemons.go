@@ -1,4 +1,4 @@
-package pokemon
+package entrypoints
 
 import (
 	entities "github.com/nicolasolmos/agree-challenge/pokemon/entities"

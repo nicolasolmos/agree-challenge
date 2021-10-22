@@ -1,11 +1,11 @@
-package pokemon
+package usecases
 
 import (
 	dtos "github.com/nicolasolmos/agree-challenge/pokemon/DTOS"
 	entities "github.com/nicolasolmos/agree-challenge/pokemon/entities"
 	repositories "github.com/nicolasolmos/agree-challenge/pokemon/repositories"
 
-	uuid "github.com/nicolasolmos/agree-challengegoogle/uuid"
+	uuid "github.com/google/uuid"
 )
 
 func CreatePokemonUseCase(paramPokemon dtos.PutPokemonDTO, paramRepository repositories.Repository) {

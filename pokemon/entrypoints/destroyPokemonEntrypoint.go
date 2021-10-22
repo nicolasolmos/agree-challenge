@@ -1,4 +1,4 @@
-package pokemon
+package entrypoints
 
 import (
 	repositories "github.com/nicolasolmos/agree-challenge/pokemon/repositories/mysql"

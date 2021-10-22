@@ -1,4 +1,4 @@
-package pokemon
+package entrypoints
 
 import (
 	dtos "github.com/nicolasolmos/agree-challenge/pokemon/DTOS"
