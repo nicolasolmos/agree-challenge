@@ -20,6 +20,6 @@ func PostPokemonController(context *gin.Context) {
 		panic("ERROR binding JSON")
 	}
 
-	entrypoints.CreatePokemonEntrypoint(myPostPokemonDTO)
+	context.JSON(http.StatusOK, gin.H{"id": entrypoints.CreatePokemonEntrypoint(myPostPokemonDTO)})
 
 }
