@@ -4,8 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	entrypoints "github.com/nicolasolmos/agree-challenge/pokemons/entrypoints"
-	entities "github.com/nicolasolmos/agree-challenge/src/entities"
+	"github.com/nicolasolmos/agree-challenge/src/entrypoints"
 )
 
 func GetPokemonByIdController(context *gin.Context) {
@@ -16,7 +15,7 @@ func GetPokemonByIdController(context *gin.Context) {
 		panic(error.Error)
 	}
 
-	myPokemon := entrypoints.GetPokemonByIdEntrypoint(entities.PokemonDTO)
+	myPokemon := entrypoints.GetPokemonEntrypoint(id)
 
 	context.JSON(http.StatusOK, myPokemon)
 }
