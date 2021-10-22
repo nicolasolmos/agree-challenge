@@ -1,0 +1,107 @@
+basePath: /pokemon/
+definitions:
+  entities.Pokemon:
+    properties:
+      cardCreationDate:
+        type: string
+      cardPicture:
+        type: string
+      expansionDeck:
+        type: string
+      health:
+        type: integer
+      id:
+        type: string
+      isFirstEdition:
+        type: boolean
+      name:
+        type: string
+      oddity:
+        type: string
+      pokemonType:
+        type: string
+      price:
+        type: number
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: desa.nolmos@gmail.com
+    name: Nicolas Olmos
+    url: http://www.swagger.io/support
+  description: Nicolas Olmos Agree Backend Challenge.
+  license:
+    name: GPLv3.0
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+  title: Nicolas Olmos Agree Backend Challenge
+  version: "1.0"
+paths:
+  /pokemon:
+    post:
+      description: Create a new pokemon and store it on the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Pokemon'
+            type: object
+        "400": {}
+        "404": {}
+        "500": {}
+      summary: Create a new pokemon and store it on the database
+  /pokemon/{id}:
+    delete:
+      description: Delete an existing pokemon on the database by provinding an Id
+      parameters:
+      - description: string that contains the ID of the pokemon to be deleted
+        in: path
+        name: id
+        type: string
+      responses:
+        "200": {}
+        "400": {}
+        "404": {}
+        "500": {}
+      summary: Delete an existing pokemon on the database
+    get:
+      description: Obtain a pokemons from the database selecting it by its ID
+      parameters:
+      - description: string that contains the ID of the pokemon to be selected
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Pokemon'
+            type: object
+        "400": {}
+        "404": {}
+        "500": {}
+      summary: Obtain a pokemons from the database selecting it by its ID
+    put:
+      description: Modify an existing pokemon and store it on the database. This overrides
+        existing values.
+      parameters:
+      - description: string that contains the ID of the pokemon to be modified
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Pokemon'
+            type: object
+        "400": {}
+        "404": {}
+        "500": {}
+      summary: Modify an existing pokemon and store it on the database
+swagger: "2.0"

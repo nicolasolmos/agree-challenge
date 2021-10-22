@@ -1,0 +1,153 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Nicolas Olmos Agree Backend Challenge.",
+        "title": "Nicolas Olmos Agree Backend Challenge",
+        "contact": {
+            "name": "Nicolas Olmos",
+            "url": "http://www.swagger.io/support",
+            "email": "desa.nolmos@gmail.com"
+        },
+        "license": {
+            "name": "GPLv3.0",
+            "url": "https://www.gnu.org/licenses/gpl-3.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/pokemon/",
+    "paths": {
+        "/pokemon": {
+            "post": {
+                "description": "Create a new pokemon and store it on the database",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Create a new pokemon and store it on the database",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/entities.Pokemon"
+                        }
+                    },
+                    "400": {},
+                    "404": {},
+                    "500": {}
+                }
+            }
+        },
+        "/pokemon/{id}": {
+            "get": {
+                "description": "Obtain a pokemons from the database selecting it by its ID",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Obtain a pokemons from the database selecting it by its ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "string that contains the ID of the pokemon to be selected",
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/entities.Pokemon"
+                        }
+                    },
+                    "400": {},
+                    "404": {},
+                    "500": {}
+                }
+            },
+            "put": {
+                "description": "Modify an existing pokemon and store it on the database. This overrides existing values.",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Modify an existing pokemon and store it on the database",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "string that contains the ID of the pokemon to be modified",
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/entities.Pokemon"
+                        }
+                    },
+                    "400": {},
+                    "404": {},
+                    "500": {}
+                }
+            },
+            "delete": {
+                "description": "Delete an existing pokemon on the database by provinding an Id",
+                "summary": "Delete an existing pokemon on the database",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "string that contains the ID of the pokemon to be deleted",
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "404": {},
+                    "500": {}
+                }
+            }
+        }
+    },
+    "definitions": {
+        "entities.Pokemon": {
+            "type": "object",
+            "properties": {
+                "cardCreationDate": {
+                    "type": "string"
+                },
+                "cardPicture": {
+                    "type": "string"
+                },
+                "expansionDeck": {
+                    "type": "string"
+                },
+                "health": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "isFirstEdition": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "oddity": {
+                    "type": "string"
+                },
+                "pokemonType": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}

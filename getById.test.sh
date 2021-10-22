@@ -1,1 +1,1 @@
-curl -X GET localhost:3000/pokemon/77583573-bda7-49f3-9bbe-e1d1da49df4a
+curl -X GET http://ec2-3-21-40-16.us-east-2.compute.amazonaws.com:3000/pokemon/b8f88d8b-99f8-4423-add5-93ad1d746e98

@@ -9,6 +9,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// PostPokemon godoc
+// @Summary Create a new pokemon and store it on the database
+// @Description Create a new pokemon and store it on the database
+// @Produce json
+// @Accepts json
+// @Success 200 {object} entities.Pokemon
+// @Failure 400
+// @Failure 404
+// @Failure 500
+// @Router /pokemon [post]
 func PostPokemonController(context *gin.Context) {
 	var myPostPokemonDTO dtos.PostPokemonDTO
 	var bindingError error

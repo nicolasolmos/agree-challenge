@@ -8,6 +8,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// DeletePokemon godoc
+// @Summary Delete an existing pokemon on the database
+// @Description Delete an existing pokemon on the database by provinding an Id
+// @Success 200
+// @Failure 400
+// @Failure 404
+// @Failure 500
+// @Router /pokemon/{id} [delete]
+// @Param id path string false "string that contains the ID of the pokemon to be deleted"
 func DeletePokemonController(context *gin.Context) {
 	var id string
 
