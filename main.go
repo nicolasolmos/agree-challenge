@@ -42,7 +42,7 @@ func main() {
 	router.POST("/pokemon", controllers.PostPokemonController)
 
 	// Swagger related stuff
-	url := ginSwagger.URL("http://0.0.0.0:3000/docs/swagger.json")
+	url := ginSwagger.URL("/docs/swagger.json")
 	router.Static("/docs", "./docs")
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
