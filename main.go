@@ -2,10 +2,12 @@ package main
 
 import (
 	"strconv"
+	"time"
 
 	controllers "github.com/nicolasolmos/agree-challenge/src/controllers"
 	"github.com/nicolasolmos/agree-challenge/src/controllers/config"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
@@ -31,6 +33,15 @@ import (
 func main() {
 
 	router := gin.Default()
+
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"localhost:3000", "0.0.0.0:3000", "ec2-3-145-30-65.us-east-2.compute.amazonaws.com:3000"},
+		AllowMethods:     []string{"GET"},
+		AllowHeaders:     []string{"Origin", "*"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 
 	router.GET("/pokemon", controllers.GetAllPokemons)
 	router.GET("/pokemon/:id", controllers.GetPokemonByIdController)
