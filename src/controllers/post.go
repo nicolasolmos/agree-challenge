@@ -33,6 +33,7 @@ func PostPokemonController(context *gin.Context) {
 
 	if myDatabaseError != nil {
 		context.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"description": myDatabaseError.Error()})
+		context.Done()
 	}
 
 	context.JSON(http.StatusOK, gin.H{"id": id})
