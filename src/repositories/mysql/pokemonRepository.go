@@ -40,11 +40,12 @@ func (base PokemonRepository) Insert(paramPokemon entities.Pokemon) error {
 	var insertionError error
 
 	insertion, insertionError := base.db.Query("INSERT INTO pokemon VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", paramPokemon.Id, paramPokemon.Name, paramPokemon.Health, paramPokemon.IsFirstEdition, paramPokemon.ExpansionDeck, paramPokemon.PokemonType, paramPokemon.Oddity, paramPokemon.Price, paramPokemon.CardPicture, paramPokemon.CardCreationDate)
-	defer insertion.Close()
+
 	if insertionError != nil {
 		return entities.NewDatabaseError("Can not insert a new pokemon on database")
 	}
 
+	defer insertion.Close()
 	return nil
 }
 
