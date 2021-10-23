@@ -7,10 +7,13 @@ import (
 	usecases "github.com/nicolasolmos/agree-challenge/src/usecases/getPokemon"
 )
 
-func GetPokemonEntrypoint(paramId string) entities.Pokemon {
+func GetPokemonEntrypoint(paramId string) (entities.Pokemon, error) {
 
-	var myRepository = repositories.NewPokemonRepository()
+	myRepository, error := repositories.NewPokemonRepository()
+
+	if error != nil {
+		return entities.Pokemon{}, error
+	}
 
 	return usecases.GetPokemonById(paramId, myRepository)
-
 }

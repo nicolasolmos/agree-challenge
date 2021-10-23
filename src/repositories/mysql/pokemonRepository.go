@@ -6,14 +6,14 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/nicolasolmos/agree-challenge/src/controllers/config"
-	entities "github.com/nicolasolmos/agree-challenge/src/entities"
+	"github.com/nicolasolmos/agree-challenge/src/entities"
 )
 
 type PokemonRepository struct {
 	db *sql.DB
 }
 
-func NewPokemonRepository() *PokemonRepository {
+func NewPokemonRepository() (*PokemonRepository, *entities.DatabaseError) {
 
 	var db *sql.DB
 	var connectionError error
@@ -26,42 +26,47 @@ func NewPokemonRepository() *PokemonRepository {
 	db, connectionError = sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", config.DB_USER, config.DB_PASSWORD, config.DB_HOST, config.DB_DATABASE))
 
 	if connectionError != nil {
-		panic(connectionError)
+		return nil, entities.NewDatabaseError("Can not establish a database connection")
+
 	}
+
 	return &PokemonRepository{
-		db: db,
-	}
+			db: db,
+		},
+		nil
 }
 
-func (base PokemonRepository) Insert(paramPokemon entities.Pokemon) {
+func (base PokemonRepository) Insert(paramPokemon entities.Pokemon) *entities.DatabaseError {
 	var insertionError error
 
 	insertion, insertionError := base.db.Query("INSERT INTO pokemon VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", paramPokemon.Id, paramPokemon.Name, paramPokemon.Health, paramPokemon.IsFirstEdition, paramPokemon.ExpansionDeck, paramPokemon.PokemonType, paramPokemon.Oddity, paramPokemon.Price, paramPokemon.CardPicture, paramPokemon.CardCreationDate)
-
+	defer insertion.Close()
 	if insertionError != nil {
-		panic("ERROR when trying to insert pokemon on MySQL table")
+		return entities.NewDatabaseError("Can not insert a new pokemon on database")
 	}
 
-	defer insertion.Close()
+	return nil
 }
 
-func (base PokemonRepository) Delete(paramPokemon entities.Pokemon) {
+func (base PokemonRepository) Delete(paramPokemon entities.Pokemon) *entities.DatabaseError {
 
 	deletion, databaseError := base.db.Query("DELETE FROM pokemon WHERE id = ?", paramPokemon.Id)
 	defer deletion.Close()
 
 	if databaseError != nil {
-		panic("ERROR when deleting spcified id on DB")
+		return entities.NewDatabaseError("Can not delete the selected pokemon on database")
 	}
 
+	return nil
 }
 
-func (baseRepository PokemonRepository) SelectAll() *[]entities.Pokemon {
+func (baseRepository PokemonRepository) SelectAll() (*[]entities.Pokemon, *entities.DatabaseError) {
 	var pokemonArray []entities.Pokemon
 	rows, databaseError := baseRepository.db.Query("SELECT * FROM pokemon")
+	defer rows.Close()
 
 	if databaseError != nil {
-		panic("Error when trying to select all rows from pokemon table")
+		return nil, entities.NewDatabaseError("Error when trying to select all rows from pokemon table")
 	}
 
 	for rows.Next() {
@@ -79,14 +84,14 @@ func (baseRepository PokemonRepository) SelectAll() *[]entities.Pokemon {
 		pokemonArray = append(pokemonArray, myPokemon)
 	}
 
-	return &pokemonArray
+	return &pokemonArray, nil
 }
 
 func (baseRepository PokemonRepository) SelectAndFilter() *[]entities.Pokemon {
 	var pokemonArray []entities.Pokemon
 	return &pokemonArray
 }
-func (baseRepository PokemonRepository) SelectById(paramId string) entities.Pokemon {
+func (baseRepository PokemonRepository) SelectById(paramId string) (entities.Pokemon, *entities.DatabaseError) {
 	var IsFirstEdition string
 	var myPokemon entities.Pokemon
 	var databaseError error
@@ -101,27 +106,29 @@ func (baseRepository PokemonRepository) SelectById(paramId string) entities.Poke
 	}
 
 	if databaseError != nil {
-		panic(databaseError.Error())
+		return entities.Pokemon{}, entities.NewDatabaseError("Can not get the selected pokemon from database")
 	}
-	return myPokemon
+
+	return myPokemon, nil
 }
+
 func (baseRepository PokemonRepository) Selectpage() *[]entities.Pokemon {
 	var pokemonArray []entities.Pokemon
 	return &pokemonArray
 }
 
-func (baseRepository PokemonRepository) UpdateAll(paramPokemon entities.Pokemon) {
+func (baseRepository PokemonRepository) UpdateAll(paramPokemon entities.Pokemon) *entities.DatabaseError {
 	var isFirstEdition string = "\x00"
 
 	if paramPokemon.IsFirstEdition {
 		isFirstEdition = "\x01"
 	}
 	row, databaseError := baseRepository.db.Query("UPDATE pokemon SET name = ?, health = ?, is_first_edition = ?,  expansion_deck = ?, pokemon_type = ?, oddity = ?, price  = ?, card_picture = ?, card_creation_date = ? WHERE id = ?;", paramPokemon.Name, paramPokemon.Health, isFirstEdition, paramPokemon.ExpansionDeck, paramPokemon.PokemonType, paramPokemon.Oddity, paramPokemon.Price, paramPokemon.CardPicture, paramPokemon.CardCreationDate, paramPokemon.Id)
+	defer row.Close()
 
 	if databaseError != nil {
-		panic(databaseError.Error())
+		return entities.NewDatabaseError("Can not update the selected pokemon on database")
 	}
 
-	println(row) // remove this
-
+	return nil
 }

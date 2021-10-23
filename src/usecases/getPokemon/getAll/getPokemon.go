@@ -5,6 +5,6 @@ import (
 	repositories "github.com/nicolasolmos/agree-challenge/src/repositories"
 )
 
-func GetAllPokemons(paramRepository repositories.Repository) *[]entities.Pokemon {
+func GetAllPokemons(paramRepository repositories.Repository) (*[]entities.Pokemon, *entities.DatabaseError) {
 	return paramRepository.SelectAll()
 }

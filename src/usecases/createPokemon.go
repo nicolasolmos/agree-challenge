@@ -8,7 +8,7 @@ import (
 	uuid "github.com/google/uuid"
 )
 
-func CreatePokemonUseCase(paramPokemon dtos.PostPokemonDTO, paramRepository repositories.Repository) string {
+func CreatePokemonUseCase(paramPokemon dtos.PostPokemonDTO, paramRepository repositories.Repository) (string, *entities.DatabaseError) {
 	var newPokemon entities.Pokemon
 
 	newPokemon.Id = uuid.NewString()
@@ -22,7 +22,11 @@ func CreatePokemonUseCase(paramPokemon dtos.PostPokemonDTO, paramRepository repo
 	newPokemon.CardPicture = paramPokemon.CardPicture
 	newPokemon.CardCreationDate = paramPokemon.CardCreationDate
 
-	paramRepository.Insert(newPokemon)
+	error := paramRepository.Insert(newPokemon)
 
-	return newPokemon.Id
+	if error != nil {
+		return "", error
+	}
+
+	return newPokemon.Id, nil
 }

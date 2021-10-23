@@ -27,7 +27,11 @@ func DeletePokemonController(context *gin.Context) {
 		panic("Missing id on URL")
 	}
 
-	entrypoints.DestroyPokemonEntrypoint(id)
+	error := entrypoints.DestroyPokemonEntrypoint(id)
+
+	if error != nil {
+		context.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"description": error.Error()})
+	}
 
 	context.JSON(http.StatusOK, gin.H{"status": "Deleted"})
 

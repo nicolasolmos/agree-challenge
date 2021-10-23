@@ -25,7 +25,11 @@ func GetPokemonByIdController(context *gin.Context) {
 		panic(error.Error)
 	}
 
-	myPokemon := entrypoints.GetPokemonEntrypoint(id)
+	myPokemon, error := entrypoints.GetPokemonEntrypoint(id)
+
+	if error != nil {
+		context.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"description": error.Error()})
+	}
 
 	context.JSON(http.StatusOK, myPokemon)
 }

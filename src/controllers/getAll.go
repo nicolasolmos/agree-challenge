@@ -22,6 +22,11 @@ import (
 func GetAllPokemons(context *gin.Context) {
 	var pokemonArray *[]entities.Pokemon
 
-	pokemonArray = entrypoints.GetAllPokemonsEntrypoint()
+	pokemonArray, error := entrypoints.GetAllPokemonsEntrypoint()
+
+	if error != nil {
+		context.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"description": error.Error()})
+	}
+
 	context.JSON(http.StatusOK, gin.H{"data": pokemonArray})
 }

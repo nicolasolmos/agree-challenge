@@ -6,7 +6,7 @@ import (
 	repositories "github.com/nicolasolmos/agree-challenge/src/repositories"
 )
 
-func UpdatePokemon(paramPokemonDTO dtos.PutPokemonDTO, paramRepository repositories.Repository) {
+func UpdatePokemon(paramPokemonDTO dtos.PutPokemonDTO, paramRepository repositories.Repository) *entities.DatabaseError {
 	var myPokemon = entities.Pokemon{
 		Id:               paramPokemonDTO.Id,
 		Name:             paramPokemonDTO.Name,
@@ -19,6 +19,6 @@ func UpdatePokemon(paramPokemonDTO dtos.PutPokemonDTO, paramRepository repositor
 		CardCreationDate: paramPokemonDTO.CardCreationDate,
 	}
 
-	paramRepository.UpdateAll(myPokemon)
+	return paramRepository.UpdateAll(myPokemon)
 
 }

@@ -6,7 +6,12 @@ import (
 	usecases "github.com/nicolasolmos/agree-challenge/src/usecases"
 )
 
-func CreatePokemonEntrypoint(paramPokemon dtos.PostPokemonDTO) string {
-	var myPokemonRepository = repositories.NewPokemonRepository()
+func CreatePokemonEntrypoint(paramPokemon dtos.PostPokemonDTO) (string, error) {
+	var myPokemonRepository, error = repositories.NewPokemonRepository()
+
+	if error != nil {
+		return "", error
+	}
+
 	return usecases.CreatePokemonUseCase(paramPokemon, myPokemonRepository)
 }
