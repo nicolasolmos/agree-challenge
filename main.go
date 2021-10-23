@@ -35,7 +35,7 @@ func main() {
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"localhost:3000", "0.0.0.0:3000", "ec2-3-145-30-65.us-east-2.compute.amazonaws.com:3000"},
+		AllowOrigins:     []string{"http://localhost:3000", "http://0.0.0.0:3000", "http://ec2-3-145-30-65.us-east-2.compute.amazonaws.com:3000"},
 		AllowMethods:     []string{"GET"},
 		AllowHeaders:     []string{"Origin", "*"},
 		ExposeHeaders:    []string{"Content-Length"},
