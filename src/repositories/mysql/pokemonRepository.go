@@ -13,7 +13,7 @@ type PokemonRepository struct {
 	db *sql.DB
 }
 
-func NewPokemonRepository() (*PokemonRepository, *entities.DatabaseError) {
+func NewPokemonRepository() (*PokemonRepository, error) {
 
 	var db *sql.DB
 	var connectionError error
@@ -36,7 +36,7 @@ func NewPokemonRepository() (*PokemonRepository, *entities.DatabaseError) {
 		nil
 }
 
-func (base PokemonRepository) Insert(paramPokemon entities.Pokemon) *entities.DatabaseError {
+func (base PokemonRepository) Insert(paramPokemon entities.Pokemon) error {
 	var insertionError error
 
 	insertion, insertionError := base.db.Query("INSERT INTO pokemon VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", paramPokemon.Id, paramPokemon.Name, paramPokemon.Health, paramPokemon.IsFirstEdition, paramPokemon.ExpansionDeck, paramPokemon.PokemonType, paramPokemon.Oddity, paramPokemon.Price, paramPokemon.CardPicture, paramPokemon.CardCreationDate)
@@ -48,7 +48,7 @@ func (base PokemonRepository) Insert(paramPokemon entities.Pokemon) *entities.Da
 	return nil
 }
 
-func (base PokemonRepository) Delete(paramPokemon entities.Pokemon) *entities.DatabaseError {
+func (base PokemonRepository) Delete(paramPokemon entities.Pokemon) error {
 
 	deletion, databaseError := base.db.Query("DELETE FROM pokemon WHERE id = ?", paramPokemon.Id)
 	defer deletion.Close()
@@ -60,7 +60,7 @@ func (base PokemonRepository) Delete(paramPokemon entities.Pokemon) *entities.Da
 	return nil
 }
 
-func (baseRepository PokemonRepository) SelectAll() (*[]entities.Pokemon, *entities.DatabaseError) {
+func (baseRepository PokemonRepository) SelectAll() (*[]entities.Pokemon, error) {
 	var pokemonArray []entities.Pokemon
 	rows, databaseError := baseRepository.db.Query("SELECT * FROM pokemon")
 	defer rows.Close()
@@ -91,7 +91,7 @@ func (baseRepository PokemonRepository) SelectAndFilter() *[]entities.Pokemon {
 	var pokemonArray []entities.Pokemon
 	return &pokemonArray
 }
-func (baseRepository PokemonRepository) SelectById(paramId string) (entities.Pokemon, *entities.DatabaseError) {
+func (baseRepository PokemonRepository) SelectById(paramId string) (entities.Pokemon, error) {
 	var IsFirstEdition string
 	var myPokemon entities.Pokemon
 	var databaseError error
@@ -117,7 +117,7 @@ func (baseRepository PokemonRepository) Selectpage() *[]entities.Pokemon {
 	return &pokemonArray
 }
 
-func (baseRepository PokemonRepository) UpdateAll(paramPokemon entities.Pokemon) *entities.DatabaseError {
+func (baseRepository PokemonRepository) UpdateAll(paramPokemon entities.Pokemon) error {
 	var isFirstEdition string = "\x00"
 
 	if paramPokemon.IsFirstEdition {

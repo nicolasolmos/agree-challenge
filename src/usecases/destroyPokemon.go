@@ -5,7 +5,7 @@ import (
 	repositories "github.com/nicolasolmos/agree-challenge/src/repositories"
 )
 
-func DestroyPokemonUsecase(paramId string, paramRepository repositories.Repository) *entities.DatabaseError {
+func DestroyPokemonUsecase(paramId string, paramRepository repositories.Repository) error {
 	var newPokemon = entities.Pokemon{
 		Id: paramId,
 	}

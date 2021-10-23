@@ -6,7 +6,7 @@ import (
 	pokemon "github.com/nicolasolmos/agree-challenge/src/usecases/getPokemon/getAll"
 )
 
-func GetAllPokemonsEntrypoint() (*[]entities.Pokemon, *entities.DatabaseError) {
+func GetAllPokemonsEntrypoint() (*[]entities.Pokemon, error) {
 	myRepository, error := repositories.NewPokemonRepository()
 
 	if error != nil {

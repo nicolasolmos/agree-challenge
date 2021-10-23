@@ -29,10 +29,10 @@ func PostPokemonController(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"status": "Bad Request"})
 		panic("ERROR binding JSON")
 	}
-	id, error := entrypoints.CreatePokemonEntrypoint(myPostPokemonDTO)
+	id, myDatabaseError := entrypoints.CreatePokemonEntrypoint(myPostPokemonDTO)
 
-	if error != nil {
-		context.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"description": error.Error()})
+	if myDatabaseError != nil {
+		context.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"description": myDatabaseError.Error()})
 	}
 
 	context.JSON(http.StatusOK, gin.H{"id": id})
