@@ -5,7 +5,8 @@ type DatabaseError struct {
 }
 
 func NewDatabaseError(paramMessage string) *DatabaseError {
-	return &DatabaseError{description: paramMessage}
+	myError := DatabaseError{description: paramMessage}
+	return &myError
 }
 
 func (baseType DatabaseError) Error() string {
