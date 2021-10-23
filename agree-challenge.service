@@ -1,0 +1,29 @@
+[Unit]
+Description=Agree-challenge service
+ConditionPathExists=/home/ubuntu/agree-challenge/agree-challenge
+After=network.target
+ 
+[Service]
+Type=simple
+User=agreechallenge
+Group=agreechallenge
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=10
+startLimitIntervalSec=60
+
+WorkingDirectory=/home/ubuntu/agree-challenge/agree-challenge
+ExecStart=/home/ubuntu/agree-challenge/agree-challenge
+
+# make sure log directory exists and owned by syslog
+PermissionsStartOnly=true
+ExecStartPre=/bin/mkdir -p /var/log/agreechallenge
+ExecStartPre=/bin/chown syslog:adm /var/log/agreechallenge
+ExecStartPre=/bin/chmod 755 /var/log/agreechallenge
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=agreechallenge
+ 
+[Install]
+WantedBy=multi-user.target
