@@ -5,15 +5,9 @@ type DatabaseError struct {
 }
 
 func NewDatabaseError(paramMessage string) *DatabaseError {
-	var newError = new(DatabaseError)
-	newError.setDescription(paramMessage)
-	return newError
+	return &DatabaseError{description: paramMessage}
 }
 
 func (baseType DatabaseError) Error() string {
 	return baseType.description
-}
-
-func (baseType DatabaseError) setDescription(paramDescription string) {
-	baseType.description = paramDescription
 }

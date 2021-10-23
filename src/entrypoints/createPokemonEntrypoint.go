@@ -7,7 +7,7 @@ import (
 )
 
 func CreatePokemonEntrypoint(paramPokemon dtos.PostPokemonDTO) (string, error) {
-	var myPokemonRepository, error = repositories.NewPokemonRepository()
+	myPokemonRepository, error := repositories.NewPokemonRepository()
 
 	if error != nil {
 		return "", error
